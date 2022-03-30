@@ -31,8 +31,6 @@ jobs:
           wget --quiet --wait=3 http://localhost:3005/install.php?install=yes
 
       - name: run security test        
-        env:
-          LICENSE_KEY: ${{ secrets.LICENSE_KEY }}
         run: |
           wget https://github.com/whitehatsec/vantage-prevent-distributions/releases/latest/download/VantagePrevent.deb          
           sudo apt-get install -f ./VantagePrevent.deb 
@@ -42,17 +40,12 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v1
         with:
-          name: IDD Scan Results
+          name: Vantage Prevent - JSON Scan Report
           path: results.json
 
       - name: "upload html report"
         if: ${{ always() }}
         uses: actions/upload-artifact@v1
         with:
-          name: IDD Scan Report
+          name: Vantage Prevent - HTML Scan Report
           path: results.html
-      - name: "create issue"
-        if: ${{ always() }}
-        uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
