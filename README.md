@@ -18,3 +18,4 @@ and you should be able to go to <ip>/install.php to set up your instance.
 
   
   More Text Some more text
+ 
